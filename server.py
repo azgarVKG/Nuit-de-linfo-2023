@@ -23,7 +23,7 @@ def inscription():
 
 @app.route("/mon_compte")
 def compte():
-    session['argent'] = cur.execute("SELECT solde FROM compte WHERE nom=?;", (session['ps'],)).fetchone()[0]
+    session['argent'] = cur.execute("SELECT solde FROM compte WHERE nom=?;", (session['pseudo'],)).fetchone()[0]
     return render_template('compte.html', solde=session['argent'])
 
 @app.route("/retirer")
@@ -37,24 +37,24 @@ def ajouter():
 @app.route("/retrait", methods=['POST'])
 def retrait():
     a = int(request.form['montant'])
-    argent = int(cur.execute("SELECT solde FROM compte WHERE nom=?;",(session['ps'],)).fetchone()[0])
+    argent = int(cur.execute("SELECT solde FROM compte WHERE nom=?;",(session['pseudo'],)).fetchone()[0])
     montant = argent - a
-    cur.execute("UPDATE compte SET solde = ? WHERE nom = ?;", (montant, session['ps'],))
+    cur.execute("UPDATE compte SET solde = ? WHERE nom = ?;", (montant, session['pseudo'],))
     con.commit()
     return render_template('compte.html', solde=montant)
 
 @app.route("/traitement", methods=['POST'])
 def maj():
     a = int(request.form['montant'])
-    argent = int(cur.execute("SELECT solde FROM compte WHERE nom=?;", (session['ps'],)).fetchone()[0])
+    argent = int(cur.execute("SELECT solde FROM compte WHERE nom=?;", (session['pseudo'],)).fetchone()[0])
     montant = a + argent
-    cur.execute("UPDATE compte SET solde = ? WHERE nom = ?;", (montant, session['ps'],))
+    cur.execute("UPDATE compte SET solde = ? WHERE nom = ?;", (montant, session['pseudo'],))
     con.commit()
     return render_template('compte.html', solde=montant)
 
 @app.route("/nouveaux", methods=['POST'])
 def la_bienvenue():
-    session['ps'] = request.form['nom']
+    session['pseudo'] = request.form['nom']
     if cur.execute("SELECT nom FROM donne WHERE nom=?;", (request.form['nom'],)).fetchone() != None:
         return render_template('connexion.html')
     else:
@@ -62,7 +62,7 @@ def la_bienvenue():
         cur.execute("INSERT INTO coord(mail, nom) VALUES(?, ?)", (request.form['mail'], request.form['nom'],))
         cur.execute("INSERT INTO compte(mail, nom, solde) VALUES(?, ?, ?)", (request.form['mail'], request.form['nom'], 0,))
         con.commit()
-    return render_template('bienvenue.html', name=request.form['nom'], ps = session['ps'])
+    return render_template('bienvenue.html', name=request.form['nom'], ps = session['pseudo'])
 
 @app.route("/greeting", methods=['POST'])
 def greeting():
