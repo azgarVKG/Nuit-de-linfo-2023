@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['DATA_DIR'] = join(dirname(realpath(__file__)),'static')
 app.secret_key = b'99b45274a4b2da7440ab249f17e718688b53b646f3dd57f23a9b29839161749f'
 
-con = sqlite3.connect('traitement.db', check_same_thread=False)
+con = sqlite3.connect(join(app.config['DATA_DIR'], "traitement.db"), check_same_thread=False)
 cur = con.cursor()
 
 @app.route("/")
@@ -66,9 +66,9 @@ def la_bienvenue():
 
 @app.route("/greeting", methods=['POST'])
 def greeting():
-    if len(cur.execute("SELECT nom FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'], request.form['pwd'],)).fetchone())[0] == None:
+    if cur.execute("SELECT nom FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'], request.form['pwd'],)).fetchone()[0] == None:
         return redirect(url_for("login"))
-    if len(cur.execute("SELECT pwd FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'],request.form['pwd'],)).fetchone()[0]) == None:
+    if cur.execute("SELECT pwd FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'],request.form['pwd'],)).fetchone()[0] == None:
         return redirect(url_for("login"))
     return render_template('greeting.html', name=request.form['nom'])
 
