@@ -17,4 +17,5 @@ CREATE TABLE IF NOT EXISTS NoFakes(
     Proof2 TEXT,
     Proof3 TEXT
     FOREIGN KEY (ID)
+        REFERENCES Fakes (ID)
 );
