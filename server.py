@@ -72,4 +72,4 @@ def greeting():
         return redirect(url_for("login"))
     return render_template('greeting.html', name=request.form['nom'])
 
-app.run(host = '127.0.0.1', port='8080', debug=True)
+app.run(host = '127.0.0.1', port='8080', debug=True, ssl_context='adhoc')
