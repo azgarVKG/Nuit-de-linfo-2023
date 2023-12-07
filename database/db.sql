@@ -1,21 +1,17 @@
+CREATE TABLE IF NOT EXISTS Game(
+    ID INTEGER PRIMARY KEY,
+    Correct_response TEXT,
+    Monster_dialog TEXT,
+    Fake1 TEXT,
+    Fake2 TEXT,
+    Fake3 TEXT
+);
+
 CREATE TABLE IF NOT EXISTS Fact(
-    ID INT PRIMARY KEY,
-    Ennonce TEXT,
-    src TEXT
-);
-
-CREATE TABLE IF NOT EXISTS NoFakes(
-    ID INT PRIMARY KEY,
+    ID INTEGER PRIMARY KEY,
     Info TEXT,
-    Proof TEXT
-);
-
-CREATE TABLE IF NOT EXISTS Fakes(
-    ID INT PRIMARY KEY,
-    Info TEXT,
-    Proof1 TEXT,
-    Proof2 TEXT,
-    Proof3 TEXT
+    full_text TEXT,
+    source TEXT,
     FOREIGN KEY (ID)
-        REFERENCES NoFakes (ID)
+        REFERENCES Game (ID)
 );
