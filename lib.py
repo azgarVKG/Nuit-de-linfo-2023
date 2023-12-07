@@ -3,7 +3,7 @@ import sqlite3
 database = sqlite3.connect("database/ndl.db")
 databaseCursor = database.cursor()
 
-def getData(table: str, column: str, parameter: str, parameterVal):
+def getData(table: str, column: str, parameter: str, parameterVal) -> list[tuple] | tuple:
 
     if parameter == None:
         query = f"SELECT {column} FROM {table};"
@@ -29,7 +29,7 @@ def updateData(table: str, columns: str | list[str], newValues: list, parameter:
 
     if parameter != None: query += f"WHERE {parameter} = {parameterVal};"
     databaseCursor.execute(query)
-    
+
     return True
 
 # Example
