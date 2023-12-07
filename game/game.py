@@ -1,5 +1,6 @@
 import pyxel 
 import random
+import json
 
 class Jeu:
     def __init__ (self):
@@ -26,6 +27,8 @@ class Jeu:
         print(self.monster)
         for m in self.monster:
             pyxel.rect(m['x'], m['y'], 10, 10, 7)
+        with open("data.json", "r") as file:
+            pyxel.text(20, 20, json.load(file)["click"], 3)
 
 class Joueur:
     def __init__(self):
