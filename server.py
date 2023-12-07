@@ -6,24 +6,23 @@ app = Flask(__name__)
 app.config['DATA_DIR'] = join(dirname(realpath(__file__)),'static')
 app.secret_key = b'99b45274a4b2da7440ab249f17e718688b53b646f3dd57f23a9b29839161749f'
 
+con = sqlite3.connect('traitement.db')
+cur = con.cursor()
+
 @app.route("/")
 def index():
     return render_template('index.html')
 
 @app.route("/connexion")
 def login():
-    
     return render_template('login.html')
 
 @app.route("/inscription")
 def inscription():
-    
     return render_template('connexion.html')
 
 @app.route("/mon_compte")
 def compte():
-    con = sqlite3.connect('traitement.db')
-    cur = con.cursor()
     solde = cur.execute("SELECT solde FROM compte;").fetchone() 
     session['argent'] = solde
     print(solde)
@@ -31,7 +30,6 @@ def compte():
 
 @app.route("/retirer")
 def retré():
-    
     return render_template('retrait.html')
 
 @app.route("/ajout")
@@ -41,8 +39,6 @@ def ajouter():
 
 @app.route("/retrait", methods=['POST'])
 def retrait():
-    con = sqlite3.connect('traitement.db')
-    cur = con.cursor()
     arg = request.form
     a = arg.get('montant')
     argent = cur.execute("SELECT solde FROM compte;") 
@@ -63,8 +59,6 @@ def retrait():
 
 @app.route("/traitement", methods=['POST'])
 def maj():
-    con = sqlite3.connect('traitement.db')
-    cur = con.cursor()
     arg = request.form
     a = arg.get('montant')
     argent = cur.execute("SELECT solde FROM compte;") 
@@ -82,8 +76,6 @@ def maj():
 
 @app.route("/nouveaux", methods=['POST'])
 def la_bienvenue():
-    con = sqlite3.connect('traitement.db')
-    cur = con.cursor()
     don = request.form
     ps = don.get('nom')
     session['ps'] = ps
@@ -102,20 +94,17 @@ def la_bienvenue():
 
 @app.route("/greeting", methods=['POST'])
 def greeting():
-    con = sqlite3.connect('traitement.db')
-    cur = con.cursor()
     donnees = request.form
     nom = donnees.get('nom')
     pwd = donnees.get('pwd')
     result = cur.execute("SELECT nom FROM donne WHERE nom=?;", (nom,))
     result = cur.fetchall()
     if len(result) == 0:
-
-    ct = result[0][0]
+        ct = result[0][0]
     mdp = cur.execute("SELECT pwd FROM donne WHERE nom=?;", (nom,))
     mdp = cur.fetchall()
     if len(mdp) == 0:
-    c = mdp[0][0]
+        c = mdp[0][0]
     print(ct, c)
     print(nom, pwd)
     while nom != ct and pwd != c:
