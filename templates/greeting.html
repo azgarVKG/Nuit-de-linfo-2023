@@ -7,15 +7,11 @@
     <title>Greeting</title>
 </head>
 <body>
-{% if name == "Tom" %}
-Salut mec
+{% if visibility %}
+connecté en tant que {{name}}.
 {% else %}
-Bonjour {{name}}
+Nom ou mot de passe incorrect.
 {% endif %}
-
-{% for i in range(3) %}
-<h1> Youpi</h1>
-{% endfor %}
 <br>
 <a href="/">index</a>
 <br>

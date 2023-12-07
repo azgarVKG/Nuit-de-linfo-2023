@@ -70,6 +70,6 @@ def greeting():
         return redirect(url_for("login"))
     if cur.execute("SELECT pwd FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'],request.form['pwd'],)).fetchone() == None:
         return redirect(url_for("login"))
-    return render_template('greeting.html', name=request.form['nom'])
+    return render_template('greeting.html', name=request.form['nom'], visibility = True)
 
 app.run(host = '127.0.0.1', port='8080', debug=True, ssl_context='adhoc')
