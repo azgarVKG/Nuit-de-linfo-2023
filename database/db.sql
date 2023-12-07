@@ -1,17 +1,14 @@
+CREATE TABLE IF NOT EXISTS Fact(
+    ID INT PRIMARY KEY,
+    Ennonce TEXT,
+    src TEXT
+);
+
 CREATE TABLE IF NOT EXISTS Fakes(
     ID INT PRIMARY KEY,
     Info TEXT,
     Proof TEXT
 );
-
-INSERT INTO Fakes
-(ID, Info, Proof)
-VALUES
-(1, '',''),
-(2, '',''),
-(3, '',''),
-(4, '','');
-
 
 CREATE TABLE IF NOT EXISTS NoFakes(
     ID INT PRIMARY KEY,
@@ -21,11 +18,3 @@ CREATE TABLE IF NOT EXISTS NoFakes(
     Proof3 TEXT
     FOREIGN KEY (ID)
 );
-
-INSERT INTO NoFakes
-(ID, Info, Proof1, Proof2, Proof3)
-VALUES
-(1, '','','',''),
-(2, '','','',''),
-(3, '','','',''),
-(4, '','','','');
