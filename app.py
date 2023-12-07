@@ -7,7 +7,12 @@ app.secret_key = b'6b1c2d979b55431bdc13c133bc026c80311b606aad7f3987b6638970bff1a
 @app.route("/")
 def index():
     return render_template("index.html")
-    
+
+@app.route('/bilan')
+def bilan():
+    data = {}
+
+    return render_template("bilan.html", sessionData=data)
 
 if __name__ == "__main__":
     app.run(debug=True)
