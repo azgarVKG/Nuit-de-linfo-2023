@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS Game(
 CREATE TABLE IF NOT EXISTS Fact(
     ID INTEGER PRIMARY KEY,
     Info TEXT,
-    full_text TEXT,
-    source TEXT,
+    Full_text TEXT,
+    Source TEXT,
     FOREIGN KEY (ID)
         REFERENCES Game (ID)
 );
