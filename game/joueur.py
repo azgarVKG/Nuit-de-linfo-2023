@@ -26,10 +26,10 @@ class Joueur:
     def victoire(self):
         self.score += 1
 
-    def bonne_reponse(self):
+    def plus_nb_bonne_reponse(self):
         self.nb_bonne_reponse += 1
 
-    def mauvaise_reponse(self):
+    def plus_nb_mauvaise_reponse(self):
         self.nb_mauvaise_reponse += 1
         self.pv -= 1
 
