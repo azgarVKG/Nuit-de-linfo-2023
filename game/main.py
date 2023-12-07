@@ -1,5 +1,6 @@
 import pyxel, math
 from joueur import Joueur
+from mob import *
 
 class Jeu:
     def __init__(self):
