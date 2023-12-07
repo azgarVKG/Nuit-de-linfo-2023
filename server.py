@@ -23,7 +23,7 @@ def inscription():
 
 @app.route("/mon_compte")
 def compte():
-    session['argent'] = cur.execute("SELECT solde FROM compte WHERE ;").fetchone()[0]
+    session['argent'] = cur.execute("SELECT solde FROM compte WHERE nom=?;", (session['ps'],)).fetchone()[0]
     return render_template('compte.html', solde=session['argent'])
 
 @app.route("/retirer")
@@ -66,9 +66,9 @@ def la_bienvenue():
 
 @app.route("/greeting", methods=['POST'])
 def greeting():
-    if cur.execute("SELECT nom FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'], request.form['pwd'],)).fetchone()[0] == None:
+    if cur.execute("SELECT nom FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'], request.form['pwd'],)).fetchone() == None:
         return redirect(url_for("login"))
-    if cur.execute("SELECT pwd FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'],request.form['pwd'],)).fetchone()[0] == None:
+    if cur.execute("SELECT pwd FROM donne WHERE nom=? AND pwd=?;", (request.form['nom'],request.form['pwd'],)).fetchone() == None:
         return redirect(url_for("login"))
     return render_template('greeting.html', name=request.form['nom'])
 
