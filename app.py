@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, url_for, request, session
-from lib import getData, saveData
 
 
 app = Flask(__name__)
