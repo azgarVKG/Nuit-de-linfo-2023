@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS Fakes(
     Proof TEXT
 );
 
+
 CREATE TABLE IF NOT EXISTS NoFakes(
     ID INT PRIMARY KEY,
     Info TEXT,
