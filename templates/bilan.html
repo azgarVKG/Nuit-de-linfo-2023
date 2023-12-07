@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GAME - Bilan de votre session</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    </head>
-    <body>
-        <!-- MAIN CONTAINER -->
-        <div class="container">
-            <!-- Navbar -->
-            <div class="navbar bg-body-secondary">
-                <a class="navbar-brand" href="/">GAME</a>
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="/">Accueil</a></li>
-                </ul>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex flex-column">
+    <div class="container pt-4">
+        <h1 class="text-danger fw-bold">GAME - Bilan de votre session</h1>
+        <p class="text-success fs-5">
+            Merci d'être arrivé jusqu'ici ! On espère que le jeu vous a plu. <br>
+            Maintenant, voyons de plus près dans quels cas vous avez décelé les facts des fake news de la part des villageois et des monstres, en vous éduquant un peu plus sur le sujet.
+        </p>
+
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Les voitures produisent 100 L de CO2 par minute.</h5>
+              <h6 class="card-subtitle text-body-secondary">Vous (n')avez (pas) réussi à déceler la fake news.(en rouge si pas réussi, en vert si réussi)</h6>
+              <p class="card-text">(Proof1) (Proof2) (Proof3) (D'autres phrases si besoin...)</p>
+              <a href="#" class="btn btn-danger">En savoir plus (lien vers page de la source)</a>
             </div>
-            <h1 class="text-primary">GAME - Bilan de votre session</h1>
-
-
         </div>
-
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </body>
-</html>
+    </div>
+</div>
+
+{% endblock %}
