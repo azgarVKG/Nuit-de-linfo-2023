@@ -110,15 +110,17 @@ def greeting():
     result = cur.execute("SELECT nom FROM donne WHERE nom=?;", (nom,))
     result = cur.fetchall()
     if len(result) == 0:
+     return render_template('greeting.html')
 
-        ct = result[0][0]
-        mdp = cur.execute("SELECT pwd FROM donne WHERE nom=?;", (nom,))
-        mdp = cur.fetchall()
-        if len(mdp) == 0:
-            c = mdp[0][0]
-            print(ct, c)
-            print(nom, pwd)
-            while nom != ct and pwd != c:
+    ct = result[0][0]
+    mdp = cur.execute("SELECT pwd FROM donne WHERE nom=?;", (nom,))
+    mdp = cur.fetchall()
+    if len(mdp) == 0:
+        return render_template('greeting.html')
+    c = mdp[0][0]
+    print(ct, c)
+    print(nom, pwd)
+    while nom != ct and pwd != c:
         
                 return render_template('greeting1.html')
     
